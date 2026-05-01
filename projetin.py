@@ -1,5 +1,5 @@
 #fazenda sertao 
-#Douglas Alencar Pereira Vieira P1 
+#Douglas Alencar Pereira Vieira e Francisco Isaac Diniz Vidal P1 
 
 cliente = []
 adm = []
@@ -15,7 +15,7 @@ while True:
     print("0- fechar programa ")
 
     print("-"*50)
-    opcao1 = ("Digite a Opcao ")
+    opcao1 = input("Digite a Opcao ")
     if opcao1 == 0 : 
         break
     if opcao1 == 1 :
