@@ -56,12 +56,12 @@ while True:
                 break
 
         while True:
-            tipo = str(input(" Diga qual o tipo : A - ADM ou C - Cliente "))
+            tipo = str(input(" Diga qual o tipo : A - ADM ou C - Cliente: ")).upper()
 
-            if tipo != 'A' or 'C':
-                print('Tipo Invalido.')
-            else:
+            if tipo == 'A' or 'C':
                 break
+            else:
+                print('Tipo Invalido.')
 
     p = ([nome,email,usuario,senha,tipo])
     perfis.append(p)
@@ -81,6 +81,21 @@ while True:
                 
                 if p [4] == A:
                     print('Perfil ADM')
+                while True:
+                    print("\n\nFazenda Sertao\n\n")
+                    print("\n\nPainel ADM\n\n")
+
+                    print("-"*50)
+
+                    print('1- Inserir Produto')
+                    print('2- Alterar Produtos Do Estoque')
+                    print('3- Gerenciar Rebanho')
+                    print('4- Retirar Cliente do Painel')
+                    print('5- Lista de Estoque')
+                    print('6- Silagem')
+                    print("0- fechar programa ")
+
+                    print("-"*50)
 
                 elif p [4] == C:
                     print('Perfil CLIENTE')
@@ -88,4 +103,124 @@ while True:
                 else:
                     print('Perfil Invalido!')
 
+
+while True:
+    print("\n\nFazenda Sertao\n\n")
+    print("\n\nPainel ADM\n\n")
+
+    print("-"*50)
+
+    print('1- Inserir Produto')
+    print('2- Alterar Produtos Do Estoque')
+    print('3- Gerenciar Rebanho')
+    print('4- Retirar Cliente do Painel')
+    print('5- Lista de Estoque')
+    print('6- Silagem')
+    print("0- fechar programa ")
+
+    print("-"*50)
+
                 
+
+
+
+
+data = input('Data: (dd/mm/aaaa)')         
+dataFormada = data.split('/')
+dia = dataFormada [0]
+mes = dataFormada [1]
+ano = dataFormada [2]
+
+
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+# contatos = []
+
+# while True:
+#     print ("Bem vindo ao brasicont app ")
+#     print ("1- Criar contato  ")
+#     print ("2- Buscar contato por nome ")
+#     print ("3- listar contatos ")
+#     print ("4- alterar contato ")
+#     print ("5- Apagar contato ")
+#     print ("6- Buscar contato por numero ")
+#     print ("0- sair ")
+#     opcao = int(input("Digite a opcao : "))
+#     if opcao == 0 :
+#         break
+#     elif opcao == 1 :
+#         nome = input("digite o nome do contato : ")
+#         celular = int(input("digite o numero do celular :"))
+#         email = input("digite email : ")
+#         contatos.append([nome,celular,email])
+
+#     elif opcao == 2 : 
+#         print("-" * 50  )
+#         nome = input("Digite o nome do contato : ")
+#         for c in contatos : 
+#             if c [0] == nome :
+#                 print(c[0],"-", c[1],"-", c[2]) 
+                
+#         print("-" * 50  )
+        
+#     elif opcao == 3 :
+
+#         print("-" * 50  )
+#         for c in contatos: 
+#             print(c[0],"-", c[1],"-", c[2])
+        
+#         print("-" * 50  )
+
+    
+#     elif opcao == 4 :
+#         print("-" * 50  )
+#         print ("Para alterar informe o dado abaixo ")
+#         celular = input(" Digite o celular do contato ")
+        
+#         for posicao in range(len(contatos)):
+
+#             if contatos [posicao][1] == celular :
+
+#                 nome = input("digite o novo nome: ")
+#                 celular = input (" digite o novo celular :")
+#                 email = input("digite o novo email :")
+#                 contatos[posicao]= [nome,celular,email]
+
+#                 print("\n\ncontato alterado com sucesso!\n\n")
+
+#         print("-" * 50  )
+#     elif opcao == 5 :
+#         print("-" * 50  )
+#         print ( "para apagar informe o dado abaixo")
+#         celular = input("digite o celular do contato que deseja apagar ")
+        
+#         for posicao in range(len(contatos)):
+#             if contatos [posicao][1] == celular :
+#                 contatos.pop(posicao)
+#                 print (" contato removido com sucesso ")
+#                 break
+#         print("-" * 50  )
+#     elif opcao == 6 : 
+
+#         print("-" * 50  )
+#         celular = input("Digite o numero do contato : ")
+#         for c in contatos : 
+#             if c [1] == celular :
+
+#                 print(c[0],"-", c[1],"-", c[2])
+
+#         print("-" * 50  )
