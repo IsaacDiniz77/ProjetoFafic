@@ -23,14 +23,51 @@ while True:
     if opcao1 == 1 :
         print("-"*50)
 
-        nome = input ( " Digite o seu nome completo : ")
-        email = input ( " Digite seu email : ")
-        usuario = input ( "Digite seu novo usuario : ")
-        senha = input("Digite sua Nova senha : ")
-        tipo = input (" Diga qual o tipo : ADM ou Cliente ").upper 
-        perfis.append([nome,email,usuario,senha,tipo])
+        while True:
+            nome = input( " Digite o seu nome completo : ")
 
-        print("-"*50)
+            if len(nome) < 4:
+                print('Nome invalido.')
+            else:
+                break
+
+        while True:
+            email = input( " Digite seu email : ")
+
+            if '@' not in email:
+                print('Email invalido.')
+            else:
+                break
+
+        while True:
+            usuario = input ( "Digite seu novo usuario : ")
+
+            if len(usuario) < 4:
+                print('Usuario Invalido.')
+            else:
+                break
+        
+        while True:
+            senha = input("Digite sua Nova senha : ")
+
+            if len(senha) < 8:
+                print('Senha com menos de oito caracteres.')
+            else:
+                break
+
+        while True:
+            tipo = str(input(" Diga qual o tipo : A - ADM ou C - Cliente "))
+
+            if tipo != 'A' or 'C':
+                print('Tipo Invalido.')
+            else:
+                break
+
+    p = ([nome,email,usuario,senha,tipo])
+    perfis.append(p)
+
+
+    print("-"*50)
 
     if opcao1 == 2 :
         print("-"*50)
@@ -42,12 +79,13 @@ while True:
             
             if p [2] == usuario and p [3] == senha:
                 
-                if p [4] == 1:
+                if p [4] == A:
                     print('Perfil ADM')
 
-                elif p [4] == 2:
+                elif p [4] == C:
                     print('Perfil CLIENTE')
 
                 else:
                     print('Perfil Invalido!')
 
+                
