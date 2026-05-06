@@ -10,12 +10,12 @@ while True:
 
     print("-"*50)
 
-    print('1-Criar uma conta ')
+    print('1- Criar uma conta ')
     print('2- Fazer login ')
     print("0- fechar programa ")
 
     print("-"*50)
-    opcao1 = int(input("Digite a Opcao "))
+    opcao1 = int(input("Digite a Opcão: "))
 
     if opcao1 == 0 : 
         break
@@ -62,42 +62,55 @@ while True:
                 break
             else:
                 print('Tipo Invalido.')
-
-    p = ([nome,email,usuario,senha,tipo])
-    perfis.append(p)
+                p = [nome,email,usuario,senha,tipo]
+                perfis.append(p)
 
 
     print("-"*50)
 
     if opcao1 == 2 :
         print("-"*50)
+        while True:
+            usuario = input ( "Digite seu usuario : ")
+            
+            if len(usuario) < 4:
+                print('Usuario Invalido.')
+            else:
+                break
 
-        usuario = input ( "Digite seu usuario : ")    
-        senha = input("Digite sua senha : ") 
+        while True:
+            senha = input("Digite sua senha : ")
 
+            if len(senha) < 8:
+                print('Senha Errada.')
+            else:
+                break
+
+        
         for p in perfis : 
             
             if p [2] == usuario and p [3] == senha:
                 
-                if p [4] == A:
-                    print('Perfil ADM')
-                while True:
-                    print("\n\nFazenda Sertao\n\n")
-                    print("\n\nPainel ADM\n\n")
+                if p [4] == 'A':
 
-                    print("-"*50)
+                    while True:
+                        print("\n\nFazenda Sertao\n\n")
+                        print("\n\nPainel ADM\n\n")
 
-                    print('1- Inserir Produto')
-                    print('2- Alterar Produtos Do Estoque')
-                    print('3- Gerenciar Rebanho')
-                    print('4- Retirar Cliente do Painel')
-                    print('5- Lista de Estoque')
-                    print('6- Silagem')
-                    print("0- fechar programa ")
+                        print("-"*50)
 
-                    print("-"*50)
+                        print('1- Inserir Produto')
+                        print('2- Alterar Produtos Do Estoque')
+                        print('3- Gerenciar Rebanho')
+                        print('4- Retirar Cliente do Painel')
+                        print('5- Lista de Estoque')
+                        print('6- Silagem')
+                        print("0- fechar programa ")
 
-                elif p [4] == C:
+                        print("-"*50)
+                        opcao1 = int(input("Digite a Opcão: "))
+
+                elif p [4] == 'C':
                     print('Perfil CLIENTE')
 
                 else:
