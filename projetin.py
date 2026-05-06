@@ -17,6 +17,10 @@ while True:
     print("-"*50)
     opcao1 = int(input("Digite a Opcão: "))
 
+    if opcao1 != 1 or 2 or 0  :
+
+        print ("Opçao invalida ! " * 3 )
+
     if opcao1 == 0 : 
         break
 
@@ -56,14 +60,16 @@ while True:
                 break
 
         while True:
-            tipo = str(input(" Diga qual o tipo : A - ADM ou C - Cliente: ")).upper()
+            tipo = input(" Diga qual o tipo : A = ADM ou C = Cliente: ").upper()
 
-            if tipo == 'A' or 'C':
+            if tipo == 'A' or tipo == 'C':
+
+                p = [nome,email,usuario,senha,tipo]
+                perfis.append(p)
                 break
             else:
                 print('Tipo Invalido.')
-                p = [nome,email,usuario,senha,tipo]
-                perfis.append(p)
+               
 
 
     print("-"*50)
