@@ -116,8 +116,28 @@ while True:
                         print("-"*50)
                         opcao1 = int(input("Digite a Opcão: "))
 
+                    if opcao1 == 0:
+                        break
+
                 elif p [4] == 'C':
                     print('Perfil CLIENTE')
+
+                    while True:
+                        print("\n\nFazenda Sertao\n\n")
+                        print("\n\nPainel Cliente\n\n")
+
+                        print("-"*50)
+
+                        print('1- Comprar Produtos')
+                        print('2- Rebanho')
+                        print('3- Silagem')
+                        print("0- fechar programa ")
+
+                        print("-"*50)
+                        opcao1 = int(input("Digite a Opcão: "))
+
+                    if opcao1 == 0:
+                        break
 
                 else:
                     print('Perfil Invalido!')
