@@ -6,6 +6,7 @@ rebanho = []
 produtos = []
 agendamentos = []
 historico_compras = []
+aval = []
 
 
 while True: 
@@ -15,7 +16,7 @@ while True:
     print('2- Fazer login ')
     print("0- fechar programa ")
     print("-"*50)
-    opcao1 = int(input("Digite a Opcão: "))
+    opcao1 = int(input("Digite a Opcao: "))
 
     if opcao1 == 0 : 
         break
@@ -32,7 +33,7 @@ while True:
 
         while True:
             email = input(" Digite seu email : ")
-            if '@' not in email:
+            if '@gmail.com' not in email and '@hotmail.com' not in email and '@outlook.com' not in email:
                 print('Email invalido.')
             else:
                 break
@@ -42,14 +43,7 @@ while True:
             if len(usuario) < 4:
                 print('Usuario Invalido.')
             else:
-                ja_existe = False
-                for pf in perfis:
-                    if pf[2] == usuario:
-                        ja_existe = True
-                if ja_existe:
-                    print('Usuario ja cadastrado.')
-                else:
-                    break
+                break
 
         while True:
             senha = input("Digite sua Nova senha : ")
@@ -102,12 +96,13 @@ while True:
                         print('3- Lista de Estoque')
                         print('4- Remover Cliente do Painel')
                         print('5- Silagem')
-                        print("0- Logout ")
+                        print("0- Sair Painel ADM ")
                         print("-"*50)
-                        opcao1 = int(input("Digite a Opcão: "))
+                        opcao1 = int(input("Digite a Opcao: "))
 
                         if opcao1 == 0:
                             break
+
 
                         if opcao1 == 1:
 
@@ -119,12 +114,13 @@ while True:
                                 print('3- Atualizar Status')
                                 print('4- Remover Animal')
                                 print('5- Listar Rebanho')
-                                print('0- Voltar')
+                                print('0- Voltar para aba principal')
                                 print("-"*50)
-                                opcao_rebanho = int(input("Digite a Opcão: "))
+                                opcao_rebanho = int(input("Digite a Opcao: "))
 
                                 if opcao_rebanho == 0:
                                     break
+
 
                                 if opcao_rebanho == 1:
                                     print("-"*50)
@@ -147,24 +143,24 @@ while True:
 
                                     while True:
                                         identificacao = input('Brinco do animal (ex: 001): ')
-                                        brinco_existe = False
+                                        brincoexiste = False
                                         for a in rebanho:
                                             if a[1] == identificacao:
-                                                brinco_existe = True
-                                        if brinco_existe:
+                                                brincoexiste = True
+                                        if brincoexiste:
                                             print('Brinco ja cadastrado. Digite outro.')
                                         else:
                                             break
 
                                     while True:
-                                        status_cod = input('Status (V-Vender / L-Lactacao / E-Engorda): ').upper()
-                                        if status_cod == 'V':
+                                        status = input('Status (V-Vender / L-Lactacao / E-Engorda): ').upper()
+                                        if status == 'V':
                                             status = 'Para Venda'
                                             break
-                                        elif status_cod == 'L':
+                                        elif status == 'L':
                                             status = 'Em Lactacao'
                                             break
-                                        elif status_cod == 'E':
+                                        elif status == 'E':
                                             status = 'Para Engorda'
                                             break
                                         else:
@@ -173,17 +169,19 @@ while True:
                                     rebanho.append([nome_tipo, identificacao, status])
                                     print('Animal cadastrado com sucesso!')
 
+
                                 if opcao_rebanho == 2:
                                     print("-"*50)
-                                    brinco_busca = input('Brinco do animal: ')
+                                    brincobusca = input('Brinco do animal: ')
                                     encontrado = False
                                     for a in rebanho:
-                                        if a[1] == brinco_busca:
+                                        if a[1] == brincobusca:
                                             print('Tipo: ' + a[0] + ' | Brinco: ' + a[1] + ' | Status: ' + a[2])
                                             encontrado = True
                                     if encontrado == False:
                                         print('Animal nao encontrado.')
                                     print("-"*50)
+
 
                                 if opcao_rebanho == 3:
                                     print("-"*50)
@@ -195,26 +193,31 @@ while True:
                                             print(str(i+1) + '- ' + a[0] + ' | Brinco: ' + a[1] + ' | ' + a[2])
                                         print("-"*50)
                                         while True:
-                                            idx_str = input('Numero do animal para atualizar: ')
-                                            if idx_str.isdigit():
-                                                idx_at = int(idx_str) - 1
-                                                if 0 <= idx_at < len(rebanho):
-                                                    break
-                                            print('Numero invalido.')
+                                            numeroanimal = input('Numero do animal para atualizar: ')
+                                            numerovalido = False
+                                            for i in range(len(rebanho)):
+                                                if numeroanimal == str(i+1):
+                                                    numerovalido = True
+                                                    numeroatt = i
+                                            if numerovalido:
+                                                break
+                                            else:
+                                                print('Numero invalido.')
                                         while True:
-                                            novo_status_cod = input('Novo status (V-Vender / L-Lactacao / E-Engorda): ').upper()
-                                            if novo_status_cod == 'V':
-                                                rebanho[idx_at][2] = 'Para Venda'
+                                            novostatus = input('Novo status (V-Vender / L-Lactacao / E-Engorda): ').upper()
+                                            if novostatus == 'V':
+                                                rebanho[numeroatt][2] = 'Para Venda'
                                                 break
-                                            elif novo_status_cod == 'L':
-                                                rebanho[idx_at][2] = 'Em Lactacao'
+                                            elif novostatus == 'L':
+                                                rebanho[numeroatt][2] = 'Em Lactacao'
                                                 break
-                                            elif novo_status_cod == 'E':
-                                                rebanho[idx_at][2] = 'Para Engorda'
+                                            elif novostatus == 'E':
+                                                rebanho[numeroatt][2] = 'Para Engorda'
                                                 break
                                             else:
                                                 print('Status invalido.')
                                         print('Animal atualizado com sucesso!')
+
 
                                 if opcao_rebanho == 4:
                                     print("-"*50)
@@ -226,14 +229,19 @@ while True:
                                             print(str(i+1) + '- ' + a[0] + ' | Brinco: ' + a[1] + ' | ' + a[2])
                                         print("-"*50)
                                         while True:
-                                            idx_str = input('Numero do animal para remover: ')
-                                            if idx_str.isdigit():
-                                                idx_rm = int(idx_str) - 1
-                                                if 0 <= idx_rm < len(rebanho):
-                                                    break
-                                            print('Numero invalido.')
-                                        a_removido = rebanho.pop(idx_rm)
-                                        print('Animal ' + a_removido[0] + ' brinco ' + a_removido[1] + ' removido!')
+                                            numeroremover = input('Numero do animal para remover: ')
+                                            numerovalido = False
+                                            for i in range(len(rebanho)):
+                                                if numeroremover == str(i+1):
+                                                    numerovalido = True
+                                                    numeroatt = i
+                                            if numerovalido:
+                                                break
+                                            else:
+                                                print('Numero invalido.')
+                                        animalremovido = rebanho.pop(numeroatt)
+                                        print('Animal ' + animalremovido[0] + ' brinco ' + animalremovido[1] + ' removido!')
+
 
                                 if opcao_rebanho == 5:
                                     print("-"*50)
@@ -245,6 +253,7 @@ while True:
                                             print(str(i+1) + '- ' + a[0] + ' | Brinco: ' + a[1] + ' | ' + a[2])
                                     print("-"*50)
 
+
                         if opcao1 == 2:
                             while True:
                                 print("\n\nGerenciar Producao e Derivados\n\n")
@@ -253,32 +262,50 @@ while True:
                                 print('2- Alterar Produto no Estoque')
                                 print('0- Voltar')
                                 print("-"*50)
-                                opcao_prod = int(input("Digite a Opcão: "))
+                                opcaoprod = int(input("Digite a Opcao: "))
 
-                                if opcao_prod == 0:
+                                if opcaoprod == 0:
                                     break
 
-                                if opcao_prod == 1:
+                                
+                                if opcaoprod == 1:
                                     print("-"*50)
 
                                     while True:
                                         data = input('Data da ordenha (dd/mm/aaaa): ')
                                         dataFormada = data.split('/')
-                                        if len(dataFormada) == 3 and dataFormada[0].isdigit() and dataFormada[1].isdigit() and dataFormada[2].isdigit():
+                                        datavalida = False
+                                        if len(dataFormada) == 3:
+                                            validodia = True
+                                            validomes = True
+                                            validoano = True
+                                            for c in dataFormada[0]:
+                                                if c < '0' or c > '9':
+                                                    validodia = False
+                                            for c in dataFormada[1]:
+                                                if c < '0' or c > '9':
+                                                    validomes = False
+                                            for c in dataFormada[2]:
+                                                if c < '0' or c > '9':
+                                                    validoano = False
+                                            if validodia and validomes and validoano:
+                                                datavalida = True
+                                        if datavalida:
                                             break
-                                        print('Data invalida.')
+                                        else:
+                                            print('Data invalida.')
 
-                                    litros_dia = int(input('Litros de leite ordenhados no dia: '))
-                                    litros_restantes = litros_dia
+                                    litrosdia = int(input('Litros de leite ordenhados no dia: '))
+                                    litrosrestantes = litrosdia
 
                                     print("-"*50)
-                                    print('Producao registrada: ' + str(litros_dia) + 'L em ' + data)
+                                    print('Producao registrada: ' + str(litrosdia) + 'L em ' + data)
                                     fab = input('Deseja fabricar queijo com esse leite? (S/N): ').upper()
 
                                     if fab == 'S':
-                                        while litros_restantes > 0:
+                                        while litrosrestantes > 0:
                                             print("-"*50)
-                                            print('Litros disponiveis: ' + str(litros_restantes) + 'L')
+                                            print('Litros disponiveis: ' + str(litrosrestantes) + 'L')
                                             print('QC  - Queijo Coalho    (8L = 1kg)')
                                             print('QM  - Queijo Mussarela (4L = 1kg)')
                                             print('QMT - Queijo Manteiga  (6L = 1kg)')
@@ -286,69 +313,75 @@ while True:
                                             print("-"*50)
 
                                             while True:
-                                                tipo_queijo = input('Tipo de queijo: ').upper()
-                                                if tipo_queijo == 'QC':
-                                                    nome_queijo = 'Queijo Coalho'
-                                                    litros_por_kg = 8
+                                                tipoqueijo = input('Tipo de queijo: ').upper()
+                                                if tipoqueijo == 'QC':
+                                                    nomequeijo = 'Queijo Coalho'
+                                                    litrosporkg = 8
                                                     break
-                                                elif tipo_queijo == 'QM':
-                                                    nome_queijo = 'Queijo Mussarela'
-                                                    litros_por_kg = 4
+                                                elif tipoqueijo == 'QM':
+                                                    nomequeijo = 'Queijo Mussarela'
+                                                    litrosporkg = 4
                                                     break
-                                                elif tipo_queijo == 'QMT':
-                                                    nome_queijo = 'Queijo Manteiga'
-                                                    litros_por_kg = 6
+                                                elif tipoqueijo == 'QMT':
+                                                    nomequeijo = 'Queijo Manteiga'
+                                                    litrosporkg = 6
                                                     break
-                                                elif tipo_queijo == '0':
+                                                elif tipoqueijo == '0':
                                                     break
                                                 else:
                                                     print('Tipo invalido.')
 
-                                            if tipo_queijo == '0':
+                                            if tipoqueijo == '0':
                                                 break
 
-                                            kg_produzido = litros_restantes // litros_por_kg
-                                            litros_usados = kg_produzido * litros_por_kg
-                                            litros_restantes = litros_restantes - litros_usados
+                                            kgproduzido = litrosrestantes // litrosporkg
+                                            litrosusados = kgproduzido * litrosporkg
+                                            litrosrestantes = litrosrestantes - litrosusados
 
                                             print("-"*50)
-                                            print('Kg produzido  : ' + str(kg_produzido) + 'kg de ' + nome_queijo)
-                                            print('Litros usados : ' + str(litros_usados) + 'L')
-                                            print('Litros restam : ' + str(litros_restantes) + 'L')
+                                            print('Kg produzido  : ' + str(kgproduzido) + 'kg de ' + nomequeijo)
+                                            print('Litros usados : ' + str(litrosusados) + 'L')
+                                            print('Litros restam : ' + str(litrosrestantes) + 'L')
                                             print("-"*50)
 
-                                            if kg_produzido > 0:
+                                            if kgproduzido > 0:
                                                 valorptd = float(input('Valor de venda por kg: R$ '))
-                                                produtos.append([nome_queijo, kg_produzido, valorptd])
-                                                print(str(kg_produzido) + 'kg de ' + nome_queijo + ' adicionado ao estoque!')
+                                                produtos.append([nomequeijo, kgproduzido, valorptd])
+                                                print(str(kgproduzido) + 'kg de ' + nomequeijo + ' adicionado ao estoque!')
                                             else:
-                                                print('Litros insuficientes para 1kg de ' + nome_queijo + '.')
+                                                print('Litros insuficientes para 1kg de ' + nomequeijo + '.')
                                                 break
 
                                         print("-"*50)
-                                        print('Fabricacao encerrada. Litros restantes: ' + str(litros_restantes) + 'L')
+                                        print('Fabricacao encerrada. Litros restantes: ' + str(litrosrestantes) + 'L')
 
-                                if opcao_prod == 2:
+
+                                if opcaoprod == 2:
                                     print("-"*50)
                                     if len(produtos) == 0:
                                         print('Nenhum produto cadastrado.')
                                     else:
                                         for i in range(len(produtos)):
-                                            p = produtos[i]
-                                            print(str(i+1) + '- ' + p[0] + ' | ' + str(p[1]) + 'kg | R$ ' + str(p[2]) + '/kg')
+                                            pr = produtos[i]
+                                            print(str(i+1) + '- ' + pr[0] + ' | ' + str(pr[1]) + 'kg | R$ ' + str(pr[2]) + '/kg')
                                         print("-"*50)
                                         while True:
-                                            idx_str = input('Numero do produto a alterar: ')
-                                            if idx_str.isdigit():
-                                                idx_alt = int(idx_str) - 1
-                                                if 0 <= idx_alt < len(produtos):
-                                                    break
-                                            print('Numero invalido.')
-                                        nova_qtd = int(input('Nova quantidade kg: '))
-                                        novo_valor = float(input('Novo valor R$: '))
-                                        produtos[idx_alt][1] = nova_qtd
-                                        produtos[idx_alt][2] = novo_valor
+                                            produtoalterar = input('Numero do produto a alterar: ')
+                                            ptdvalido = False
+                                            for i in range(len(produtos)):
+                                                if produtoalterar == str(i+1):
+                                                    ptdvalido = True
+                                                    ptdatt = i
+                                            if ptdvalido:
+                                                break
+                                            else:
+                                                print('Numero invalido.')
+                                        novaqtd = int(input('Nova quantidade kg: '))
+                                        novovalor = float(input('Novo valor R$: '))
+                                        produtos[ptdatt][1] = novaqtd
+                                        produtos[ptdatt][2] = novovalor
                                         print('Produto atualizado com sucesso!')
+
 
                         if opcao1 == 3:
                             print("-"*50)
@@ -365,193 +398,398 @@ while True:
                                 print('Nenhum produto cadastrado.')
                             else:
                                 for i in range(len(produtos)):
-                                    p = produtos[i]
-                                    print(str(i+1) + '- ' + p[0] + ' | ' + str(p[1]) + 'kg | R$ ' + str(p[2]) + '/kg')
+                                    pr = produtos[i]
+                                    print(str(i+1) + '- ' + pr[0] + ' | ' + str(pr[1]) + 'kg | R$ ' + str(pr[2]) + '/kg')
                             print("-"*50)
+
 
                         if opcao1 == 4:
                             print("-"*50)
-                            clientes_idx = []
+                            clientes = []
                             for i in range(len(perfis)):
                                 if perfis[i][4] == 'C':
-                                    clientes_idx.append(i)
-                            if len(clientes_idx) == 0:
+                                    clientes.append(i)
+                            if len(clientes) == 0:
                                 print('Nenhum cliente cadastrado.')
                             else:
-                                for j in range(len(clientes_idx)):
-                                    c = perfis[clientes_idx[j]]
+                                for j in range(len(clientes)):
+                                    c = perfis[clientes[j]]
                                     print(str(j+1) + '- ' + c[0] + ' | Usuario: ' + c[2])
                                 print("-"*50)
                                 while True:
-                                    idx_str = input('Numero do cliente a remover: ')
-                                    if idx_str.isdigit():
-                                        escolha = int(idx_str) - 1
-                                        if 0 <= escolha < len(clientes_idx):
-                                            break
-                                    print('Numero invalido.')
-                                removido = perfis.pop(clientes_idx[escolha])
+                                    numerocliente = input('Numero do cliente a remover: ')
+                                    clientevalido = False
+                                    for j in range(len(clientes)):
+                                        if numerocliente == str(j+1):
+                                            clientevalido = True
+                                            escolha = j
+                                    if clientevalido:
+                                        break
+                                    else:
+                                        print('Numero invalido.')
+                                removido = perfis.pop(clientes[escolha])
                                 print('Cliente ' + removido[0] + ' removido com sucesso!')
+
 
                         if opcao1 == 5:
                             print("-"*50)
                             while True:
                                 data = input('Data: (dd/mm/aaaa) ')
                                 dataFormada = data.split('/')
-                                if len(dataFormada) == 3 and dataFormada[0].isdigit() and dataFormada[1].isdigit() and dataFormada[2].isdigit():
+                                datavalida = False
+                                if len(dataFormada) == 3:
+                                    validodia = True
+                                    validomes = True
+                                    validoano = True
+                                    for c in dataFormada[0]:
+                                        if c < '0' or c > '9':
+                                            validodia = False
+                                    for c in dataFormada[1]:
+                                        if c < '0' or c > '9':
+                                            validomes = False
+                                    for c in dataFormada[2]:
+                                        if c < '0' or c > '9':
+                                            validoano = False
+                                    if validodia and validomes and validoano:
+                                        datavalida = True
+                                if datavalida:
                                     break
-                                print('Data invalida.')
-                            kg_silagem = int(input('Kg de silagem consumida: '))
-                            print('Silagem de ' + str(kg_silagem) + 'kg registrada em ' + data + '!')
+                                else:
+                                    print('Data invalida.')
+                            kgsilagem = int(input('Kg de silagem consumida: '))
+                            print('Silagem de ' + str(kgsilagem) + 'kg registrada em ' + data + '!')
 
 
-
-
-
-            elif p [4] == 'C':
+                elif p[4] == 'C':
                     print('Perfil CLIENTE')
+                    nome_cliente = p[0]
 
                     while True:
                         print("\n\nFazenda Sertao\n\n")
-                        print("\n\nPainel Cliente\n\n")
-
+                        print("\n\nPainel Cliente - Ola, " + nome_cliente + "!\n\n")
                         print("-"*50)
-
                         print('1- Comprar Produtos')
-                        print('2- Rebanho')
-                        print('3- Silagem')
-                        print("0- fechar programa ")
-
+                        print('2- Ver Rebanho')
+                        print('3- Historico de Compras')
+                        print('4- Agendar Retirada/Transporte')
+                        print('5- Avaliar Produto')
+                        print("0- Sair do Painel Cliente")
                         print("-"*50)
-                        opcao1 = int(input("Digite a Opcão: "))
-
+                        opcao1 = int(input("Digite a Opcao: "))
+ 
                         if opcao1 == 0:
                             break
+ 
+ 
+                        if opcao1 == 1:
+                            print("-"*50)
+                            if len(produtos) == 0:
+                                print('Nenhum produto disponivel no estoque.')
+                            else:
+                                print('\n[ Produtos Disponiveis ]\n')
+                                for i in range(len(produtos)):
+                                    pr = produtos[i]
+                                    print(str(i+1) + '- ' + pr[0] + ' | ' + str(pr[1]) + 'kg disponivel | R$ ' + str(pr[2]) + '/kg')
+                                print("-"*50)
+ 
+                                while True:
+                                    numeroptd = input('Numero do produto que deseja comprar (0 para cancelar): ')
+                                    if numeroptd == '0':
+                                        break
+                                    ptdvalido = False
+                                    for i in range(len(produtos)):
+                                        if numeroptd == str(i+1):
+                                            ptdvalido = True
+                                            ptdcompra = i
+                                    if ptdvalido:
+                                        ptdescolhido = produtos[ptdcompra]
+                                        print('Produto: ' + ptdescolhido[0])
+                                        print('Disponivel: ' + str(ptdescolhido[1]) + 'kg')
+                                        print('Preco: R$ ' + str(ptdescolhido[2]) + '/kg')
+                                        print("-"*50)
+ 
+                                        while True:
+                                            qtdptd = input('Quantidade em kg que deseja comprar: ')
+                                            qtdvalida = True
+                                            if len(qtdptd) == 0:
+                                                qtdvalida = False
+                                            else:
+                                                for c in qtdptd:
+                                                    if c < '0' or c > '9':
+                                                        qtdvalida = False
+                                            if qtdvalida and int(qtdptd) > 0:
+                                                qtdcompra = int(qtdptd)
+                                                if qtdcompra <= ptdescolhido[1]:
+                                                    break
+                                                else:
+                                                    print('Quantidade indisponivel. Estoque: ' + str(ptdescolhido[1]) + 'kg.')
+                                            else:
+                                                print('Quantidade invalida.')
+ 
+                                        total = qtdcompra * ptdescolhido[2]
+                                        produtos[ptdcompra][1] = ptdescolhido[1] - qtdcompra
+ 
+                                        historico_compras.append([nome_cliente, ptdescolhido[0], qtdcompra, total])
+ 
+                                        print("-"*50)
+                                        print('Compra realizada com sucesso!')
+                                        print('Produto : ' + ptdescolhido[0])
+                                        print('Qtd     : ' + str(qtdcompra) + 'kg')
+                                        print('Total   : R$ ' + str(total))
+                                        print("-"*50)
+ 
+                                        continuar = input('Deseja comprar mais algum produto? (S/N): ').upper()
+                                        if continuar != 'S':
+                                            break
+                                        else:
+                                            print("\n[ Produtos Disponiveis ]\n")
+                                            for i in range(len(produtos)):
+                                                pr = produtos[i]
+                                                print(str(i+1) + '- ' + pr[0] + ' | ' + str(pr[1]) + 'kg disponivel | R$ ' + str(pr[2]) + '/kg')
+                                            print("-"*50)
+                                    else:
+                                        print('Numero invalido.')
+ 
+ 
+                        if opcao1 == 2:
+                            print("-"*50)
+                            print('\n[ Rebanho da Fazenda ]\n')
+                            if len(rebanho) == 0:
+                                print('Nenhum animal cadastrado no rebanho.')
+                            else:
+                                for i in range(len(rebanho)):
+                                    a = rebanho[i]
+                                    print(str(i+1) + '- ' + a[0] + ' | Brinco: ' + a[1] + ' | ' + a[2])
+                            print("-"*50)
+ 
+ 
+                        if opcao1 == 3:
+                            print("-"*50)
+                            print('\n[ Seu Historico de Compras ]\n')
+                            temcompra = False
+                            for hc in historico_compras:
+                                if hc[0] == nome_cliente:
+                                    print('Produto: ' + hc[1] + ' | Qtd: ' + str(hc[2]) + 'kg | Total: R$ ' + str(hc[3]))
+                                    temcompra = True
+                            if temcompra == False:
+                                print('Nenhuma compra realizada ainda.')
+                            print("-"*50)
+
+                        if opcao1 == 4:
+                            print("-"*50)
+                            print('\n[ Agendar Retirada/Transporte ]\n')
+ 
                             
-                    
+                            compras_cliente = []
+                            for hc in historico_compras:
+                                if hc[0] == nome_cliente:
+                                    compras_cliente.append(hc)
+ 
+                            if len(compras_cliente) == 0:
+                                print('Voce nao possui compras para agendar retirada.')
+                                print('Realize uma compra primeiro.')
+                                print("-"*50)
+                            else:
+                                print('O que deseja agendar para retirada:')
+                                print('1- Leite / Queijo (produto comprado)')
+                                print('2- Animal do Rebanho')
+                                print("-"*50)
+ 
+                                while True:
+                                    tipoagend = input('Escolha o tipo (1 ou 2): ')
+                                    if tipoagend == '1' or tipoagend == '2':
+                                        break
+                                    else:
+                                        print('Opcao invalida.')
+ 
+                                if tipoagend == '1':
+                                    print("\n[ Suas Compras ]\n")
+                                    for i in range(len(compras_cliente)):
+                                        hc = compras_cliente[i]
+                                        print(str(i+1) + '- ' + hc[1] + ' | ' + str(hc[2]) + 'kg | R$ ' + str(hc[3]))
+                                    print("-"*50)
+                                    while True:
+                                        numcompra = input('Numero da compra para agendar retirada: ')
+                                        compravalida = False
+                                        for i in range(len(compras_cliente)):
+                                            if numcompra == str(i+1):
+                                                compravalida = True
+                                                compra = i
+                                        if compravalida:
+                                            break
+                                        else:
+                                            print('Numero invalido.')
+                                    itemagendado = compras_cliente[compra][1] + ' (' + str(compras_cliente[compra][2]) + 'kg)'
+ 
+                                else:
+                                    print("\n[ Animais Para Venda ]\n")
+                                    animaisvenda = []
+                                    for a in rebanho:
+                                        if a[2] == 'Para Venda':
+                                            animaisvenda.append(a)
+                                    if len(animaisvenda) == 0:
+                                        print('Nenhum animal disponivel para venda no momento.')
+                                        print("-"*50)
+                                        continue
+                                    for i in range(len(animaisvenda)):
+                                        a = animaisvenda[i]
+                                        print(str(i+1) + '- ' + a[0] + ' | Brinco: ' + a[1])
+                                    print("-"*50)
+                                    while True:
+                                        numanimal = input('Numero do animal para agendar retirada: ')
+                                        animalvalido = False
+                                        for i in range(len(animaisvenda)):
+                                            if numanimal == str(i+1):
+                                                animalvalido = True
+                                                animal = i
+                                        if animalvalido:
+                                            break
+                                        else:
+                                            print('Numero invalido.')
+                                    itemagendado = animaisvenda[animal][0] + ' Brinco ' + animaisvenda[animal][1]
+ 
+                                
+                                while True:
+                                    dataagend = input('Data para retirada (dd/mm/aaaa): ')
+                                    dataFormada = dataagend.split('/')
+                                    datavalida = False
+                                    if len(dataFormada) == 3:
+                                        validodia = True
+                                        validomes = True
+                                        validoano = True
+                                        for c in dataFormada[0]:
+                                            if c < '0' or c > '9':
+                                                validodia = False
+                                        for c in dataFormada[1]:
+                                            if c < '0' or c > '9':
+                                                validomes = False
+                                        for c in dataFormada[2]:
+                                            if c < '0' or c > '9':
+                                                validoano = False
+                                        if validodia and validomes and validoano:
+                                            datavalida = True
+                                    if datavalida:
+                                        break
+                                    else:
+                                        print('Data invalida.')
+ 
+                                
+                                while True:
+                                    horarioagend = input('Horario preferido (ex: 08:00 / 14:30): ')
+                                    horarioFormado = horarioagend.split(':')
+                                    horariovalido = False
+                                    if len(horarioFormado) == 2:
+                                        validohora = True
+                                        validomin = True
+                                        for c in horarioFormado[0]:
+                                            if c < '0' or c > '9':
+                                                validohora = False
+                                        for c in horarioFormado[1]:
+                                            if c < '0' or c > '9':
+                                                validomin = False
+                                        if validohora and validomin:
+                                            hora = int(horarioFormado[0])
+                                            minuto = int(horarioFormado[1])
+                                            if 0 <= hora <= 23 and 0 <= minuto <= 59:
+                                                horariovalido = True
+                                    if horariovalido:
+                                        break
+                                    else:
+                                        print('Horario invalido. Use o formato hh:mm (ex: 08:00).')
+ 
+                                agendamentos.append([nome_cliente, dataagend, horarioagend, itemagendado, 'Pendente'])
+ 
+                                print("-"*50)
+                                print('Agendamento realizado com sucesso!')
+                                print('Cliente : ' + nome_cliente)
+                                print('Item    : ' + itemagendado)
+                                print('Data    : ' + dataagend)
+                                print('Horario : ' + horarioagend)
+                                print('Status  : Pendente')
+                                print('O caminhao da fazenda passara para buscar o pedido.')
+                                print("-"*50)
+ 
+                                print('\n[ Seus Agendamentos ]\n')
+                                temag = False
+                                for ag in agendamentos:
+                                    if ag[0] == nome_cliente:
+                                        print('Item: ' + ag[3] + ' | Data: ' + ag[1] + ' | Horario: ' + ag[2] + ' | Status: ' + ag[4])
+                                        temag = True
+                                if not temag:
+                                    print('Nenhum agendamento ainda.')
+                                print("-"*50)
+                                
+                                
+                        if opcao1 == 5:
+                            print("-"*50)
+                                    
+                            print('\n[ Avaliar Produto ]\n')
+ 
                             
-                        
+                            compras_cliente = []
+                            for hc in historico_compras:
+                                if hc[0] == nome_cliente:
+                                    compras_cliente.append(hc)
+ 
+                            if len(compras_cliente) == 0:
+                                print('Voce ainda nao realizou nenhuma compra para avaliar.')
+                                print("-"*50)
+                            else:
+                                print('Selecione o produto que deseja avaliar:')
+                                for i in range(len(compras_cliente)):
+                                    hc = compras_cliente[i]
+                                    print(str(i+1) + '- ' + hc[1] + ' | ' + str(hc[2]) + 'kg | R$ ' + str(hc[3]))
+                                print("-"*50)
+ 
+                                while True:
+                                    numavaliacao = input('Numero do produto a avaliar: ')
+                                    avaliacaovalida = False
+                                    for i in range(len(compras_cliente)):
+                                        if numavaliacao == str(i+1):
+                                            avaliacaovalida = True
+                                            avali = i
+                                    if avaliacaovalida:
+                                        break
+                                    else:
+                                        print('Numero invalido.')
+ 
+                                produtoavaliado = compras_cliente[avali][1]
+ 
+                                
+                                while True:
+                                    nota = input('Nota de 1 a 5 (1-Pessimo / 5-Excelente): ')
+                                    notavalida = nota in ['1', '2', '3', '4', '5']
+                                    if notavalida:
+                                        nota = int(nota)
+                                        break
+                                    else:
+                                        print('Nota invalida. Digite um numero de 1 a 5.')
+ 
+                                comentario = input('Deixe um comentario (opcional, Enter para pular): ')
+                                if len(comentario) == 0:
+                                    comentario = 'Sem comentario.'
 
-            else:
-                print('Perfil Invalido!')
+                                aval.append([nome_cliente, produtoavaliado, nota, comentario])
+                                
+                                print("-"*50)
+                                print('Avaliacao registrada com sucesso!')
+                                print('Produto   : ' + produtoavaliado)
+                                print('Nota      : ' + str(nota) + '/5')
+                                print('Comentario: ' + comentario)
+                                print("-"*50)
+ 
+                                
+                                totalnotas = 0
+                                qtdnotas = 0
+                                for av in aval:
+                                    if av[1] == produtoavaliado:
+                                        totalnotas = totalnotas + av[2]
+                                        qtdnotas = qtdnotas + 1
+                                media = totalnotas / qtdnotas
+                                print('Media de avaliacoes do ' + produtoavaliado + ': ' + str(round(media, 1)) + '/5')
+                                print("-"*50)
+        else:
+            print('Usuario Invalido')
+  
 
-
-while True:
-    print("\n\nFazenda Sertao\n\n")
-    print("\n\nPainel ADM\n\n")
-
-    print("-"*50)
-
-    print('1- Inserir Produto')
-    print('2- Alterar Produtos Do Estoque')
-    print('3- Gerenciar Rebanho')
-    print('4- Retirar Cliente do Painel')
-    print('5- Lista de Estoque')
-    print('6- Silagem')
-    print("0- fechar programa ")
-
-    print("-"*50)
-
-                
-
-
-
-
-data = input('Data: (dd/mm/aaaa)')         
-dataFormada = data.split('/')
-dia = dataFormada [0]
-mes = dataFormada [1]
-ano = dataFormada [2]
-
-
-        
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-# contatos = []
-
-# while True:
-#     print ("Bem vindo ao brasicont app ")
-#     print ("1- Criar contato  ")
-#     print ("2- Buscar contato por nome ")
-#     print ("3- listar contatos ")
-#     print ("4- alterar contato ")
-#     print ("5- Apagar contato ")
-#     print ("6- Buscar contato por numero ")
-#     print ("0- sair ")
-#     opcao = int(input("Digite a opcao : "))
-#     if opcao == 0 :
-#         break
-#     elif opcao == 1 :
-#         nome = input("digite o nome do contato : ")
-#         celular = int(input("digite o numero do celular :"))
-#         email = input("digite email : ")
-#         contatos.append([nome,celular,email])
-
-#     elif opcao == 2 : 
-#         print("-" * 50  )
-#         nome = input("Digite o nome do contato : ")
-#         for c in contatos : 
-#             if c [0] == nome :
-#                 print(c[0],"-", c[1],"-", c[2]) 
-                
-#         print("-" * 50  )
-        
-#     elif opcao == 3 :
-
-#         print("-" * 50  )
-#         for c in contatos: 
-#             print(c[0],"-", c[1],"-", c[2])
-        
-#         print("-" * 50  )
-
-    
-#     elif opcao == 4 :
-#         print("-" * 50  )
-#         print ("Para alterar informe o dado abaixo ")
-#         celular = input(" Digite o celular do contato ")
-        
-#         for posicao in range(len(contatos)):
-
-#             if contatos [posicao][1] == celular :
-
-#                 nome = input("digite o novo nome: ")
-#                 celular = input (" digite o novo celular :")
-#                 email = input("digite o novo email :")
-#                 contatos[posicao]= [nome,celular,email]
-
-#                 print("\n\ncontato alterado com sucesso!\n\n")
-
-#         print("-" * 50  )
-#     elif opcao == 5 :
-#         print("-" * 50  )
-#         print ( "para apagar informe o dado abaixo")
-#         celular = input("digite o celular do contato que deseja apagar ")
-        
-#         for posicao in range(len(contatos)):
-#             if contatos [posicao][1] == celular :
-#                 contatos.pop(posicao)
-#                 print (" contato removido com sucesso ")
-#                 break
-#         print("-" * 50  )
-#     elif opcao == 6 : 
-
-#         print("-" * 50  )
-#         celular = input("Digite o numero do contato : ")
-#         for c in contatos : 
-#             if c [1] == celular :
-
-#                 print(c[0],"-", c[1],"-", c[2])
-
-#         print("-" * 50  )
+                            
